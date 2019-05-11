@@ -56,6 +56,10 @@ public class Server extends NanoHTTPD {
                 Log.d(TAG, "Exception while waiting: " + e);
             }
         }
+        requestResponse.addHeader("Access-Control-Allow-Methods", "*");
+        requestResponse.addHeader("Access-Control-Allow-Origin",  "*");
+        requestResponse.addHeader("Access-Control-Allow-Headers", "*");
+        requestResponse.addHeader("Access-Control-Allow-Credentials", "true");
         return requestResponse;
     }
 
