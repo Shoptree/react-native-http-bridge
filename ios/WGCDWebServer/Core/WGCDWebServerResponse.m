@@ -87,6 +87,10 @@
   if ((self = [super initWithResponse:response reader:reader])) {
     response.contentLength = NSUIntegerMax;  // Make sure "Content-Length" header is not set since we don't know it
     [response setValue:@"gzip" forAdditionalHeader:@"Content-Encoding"];
+    [response setValue:@"*" forAdditionalHeader:@"Access-Control-Allow-Methods"];
+    [response setValue:@"*" forAdditionalHeader:@"Access-Control-Allow-Origin"];
+    [response setValue:@"*" forAdditionalHeader:@"Access-Control-Allow-Headers"];
+    [response setValue:@"true" forAdditionalHeader:@"Access-Control-Allow-Credentials"];
   }
   return self;
 }
