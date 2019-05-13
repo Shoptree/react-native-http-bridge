@@ -55,6 +55,10 @@
 - (id)initWithResponse:(WGCDWebServerResponse*)response reader:(id<WGCDWebServerBodyReader>)reader {
   if ((self = [super init])) {
     _response = response;
+    [_response setValue:@"*" forAdditionalHeader:@"Access-Control-Allow-Methods"];
+    [_response setValue:@"*" forAdditionalHeader:@"Access-Control-Allow-Origin"];
+    [_response setValue:@"*" forAdditionalHeader:@"Access-Control-Allow-Headers"];
+    [_response setValue:@"true" forAdditionalHeader:@"Access-Control-Allow-Credentials"];
     _reader = reader;
   }
   return self;
@@ -226,11 +230,11 @@
 
 - (void)prepareForReading {
   _reader = self;
-  if (_gzipped) {
+//   if (_gzipped) {
     WGCDWebServerGZipEncoder* encoder = [[WGCDWebServerGZipEncoder alloc] initWithResponse:self reader:_reader];
     [_encoders addObject:encoder];
     _reader = encoder;
-  }
+//   }
 }
 
 - (BOOL)performOpen:(NSError**)error {
